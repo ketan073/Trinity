@@ -3,7 +3,7 @@
   <!-- Basic Page Needs
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta charset="utf-8">
-  <title>Notakto</title>
+  <title>Trinity</title>
   <meta name="description" content="">
   <meta name="author" content="">
 
@@ -161,7 +161,7 @@ body { -webkit-user-select: none; }
   <div class="container">
     <div class="row">
       <div class="eight columns offset-by-two" style="margin-top: 5%">
-        <h1>Notakto Game</h1>
+        <h1>Trinity Tic-Tac-Toe Game</h1>
 
 <div id="graphics">
 <canvas id="board" width="800" height="800" style="cursor:default;" moz-opaque="" ontouchstart="touchstart(event);"></canvas>
@@ -169,17 +169,7 @@ body { -webkit-user-select: none; }
 
 <p align="center"><button onclick="newgame()">New</button>
 
-        </p><p align="center" class="help"><em>Notakto is just like TicTacToe, ... but on three boards,
-        ... and both players play <span class="gamefont">X</span>, ... and the person that completes three in a row is the loser.<br>
-        Actually, it's not like TicTacToe at all.<br>
-        Two players alternate playing <span class="gamefont">X</span> in any free cell on any live board.
-        Once a board has three-in-a-row it is dead and removed from the game.
-        The player that is forced to complete three-in-a-row on the last live board is the loser.</em>
-
-		 </p><p align="center" class="help"><a href="help.html">View help file</a> for more information about the game.
-
-        </p><p align="right"><small>© 2019 <a href="http://www.markhuckvale.com">Mark Huckvale</a></small>
-      </p></div>
+        </p></div>
     </div>
 
   </div>
@@ -193,7 +183,7 @@ body { -webkit-user-select: none; }
 <!-- About Dialog -->
 <div id="aboutdlg" class="modal" style="visibility:hidden" onmousedown="stopEvent(event)">
 <table border="0" cellpadding="3" cellspacing="3" width="100%">
-<tbody><tr><td><h3>Notakto</h3>
+<tbody><tr><td><h3>Trinity</h3>
 <p>Version 1.0
 </p><p>© 2019 Mark Huckvale
 </p><p><a href="http://www.markhuckvale.com">www.markhuckvale.com</a>
@@ -207,8 +197,6 @@ body { -webkit-user-select: none; }
 <table border="0" cellpadding="3" cellspacing="3" width="100%">
 <tbody><tr><td><h3>New Game</h3></td></tr>
 <tr><td><button class="button" onclick="startgame(0)">Human - Human</button></td></tr>
-<tr><td><button class="button" onclick="startgame(1)">Human - Computer</button></td></tr>
-<tr><td><button class="button" onclick="startgame(2)">Computer - Human</button></td></tr>
 <tr><td><button class="button" onclick="cancel('newgamedlg')">Cancel</button></td></tr>
 </tbody></table>
 </div>
