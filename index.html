@@ -1,0 +1,218 @@
+<!DOCTYPE html><html lang="en"><head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Notakto</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
+<script src="js/bdanal.js"></script>
+<script src="js/notakto.js"></script>
+<script>
+
+function resize()
+{
+  var height = document.getElementById('graphics').clientHeight;
+  var width = document.getElementById('graphics').clientWidth;
+  console.log("height="+height+", width="+width);
+  var cnv=document.getElementById('board');
+  cnv.graphheight = width;
+  cnv.graphwidth = width;
+  displayboards(0);
+}
+
+// get screen size and calculate co-ordinates of screen centre
+function screensize()
+{
+	var e = window, a = 'inner';
+	if ( !( 'innerWidth' in window ) ) {
+		a = 'client';
+		e = document.documentElement || document.body;
+	}
+	return { width : e[a+'Width'], height : e[a+'Height'], cx : e[ a+'Width' ]/2 , cy : e[ a+'Height' ]/2 }
+}
+
+// about
+function doAbout()
+{
+	$('mask').style.visibility='visible';
+	var dlg=$('aboutdlg');
+	dlg.style.top = (screensize().cy - dlg.offsetHeight/2)+"px";
+	dlg.style.left = (screensize().cx - dlg.offsetWidth/2)+"px";
+	console.log("screen width="+screensize().cx+" width="+dlg.offsetWidth+" top="+dlg.style.top+" left="+dlg.style.left);
+	dlg.style.visibility='visible';
+}
+
+// stop event propagation
+function stopEvent(event)
+{
+	//console.log("stopEvent()");
+	event.stopPropagation();
+}
+
+// dialog cancel button handler
+function cancel(dlg)
+{
+	//console.log("cancel()");
+	$('mask').style.visibility='hidden';
+	$(dlg).style.visibility='hidden';
+	displayboards(0);
+}
+
+// new game dialog
+function newgame()
+{
+	$('mask').style.visibility='visible';
+	var dlg=$('newgamedlg');
+	dlg.style.top = (screensize().cy - dlg.offsetHeight/2)+"px";
+	dlg.style.left = (screensize().cx - dlg.offsetWidth/2)+"px";
+	dlg.style.visibility='visible';
+}
+
+// start new game
+function startgame(gtype)
+{
+	resetgame(gtype);
+	$('mask').style.visibility='hidden';
+	$('newgamedlg').style.visibility='hidden';
+}
+
+function initialise()
+{
+	resize();
+}
+
+</script>
+
+<style>
+@font-face {
+    font-family: 'BlackHand';
+    src: url('fonts/blackHand_TRIAL.otf') format('opentype');
+    font-weight:normal;
+}
+
+#graphics {
+  width:100%;
+  margin: 0px auto;
+  font-family: "BlackHand";
+  font-size: 1rem;
+}
+#board {
+  width:100%;
+  margin-bottom: 1em;
+}
+.help {
+  font-family: "Raleway";
+  font-size: 12pt;
+}
+.gamefont {
+  font-family: "BlackHand";
+  font-size: 12pt;
+}
+.modal {
+	background-color: white;
+	color: black;
+	border: 1px solid gray;
+	padding: 20px;
+	display: block;
+	position: fixed;
+	top: 100px;
+	left: 100px;
+}
+.background {
+	background-color: black;
+	opacity: 0.8;
+	filter:alpha(opacity=80);
+	background-color:rgba(0,0,0,0.8);
+	width: 100%;
+	min-height: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	color: white;
+}
+#aboutdlg, #newgamedlg table tr td { text-align:center; }
+body { -webkit-user-select: none; }
+</style>
+
+</head>
+<body onload="initialise()" onresize="resize()" onmousedown="mousedown(event)">
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="container">
+    <div class="row">
+      <div class="eight columns offset-by-two" style="margin-top: 5%">
+        <h1>Notakto Game</h1>
+
+<div id="graphics">
+<canvas id="board" width="800" height="800" style="cursor:default;" moz-opaque="" ontouchstart="touchstart(event);"></canvas>
+</div>
+
+<p align="center"><button onclick="newgame()">New</button>
+
+        </p><p align="center" class="help"><em>Notakto is just like TicTacToe, ... but on three boards,
+        ... and both players play <span class="gamefont">X</span>, ... and the person that completes three in a row is the loser.<br>
+        Actually, it's not like TicTacToe at all.<br>
+        Two players alternate playing <span class="gamefont">X</span> in any free cell on any live board.
+        Once a board has three-in-a-row it is dead and removed from the game.
+        The player that is forced to complete three-in-a-row on the last live board is the loser.</em>
+
+		 </p><p align="center" class="help"><a href="help.html">View help file</a> for more information about the game.
+
+        </p><p align="right"><small>© 2019 <a href="http://www.markhuckvale.com">Mark Huckvale</a></small>
+      </p></div>
+    </div>
+
+  </div>
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
+<!-- Screen overlay mask -->
+<div id="mask" class="background" style="visibility:hidden" onmousedown="stopEvent(event)"></div>
+
+<!-- About Dialog -->
+<div id="aboutdlg" class="modal" style="visibility:hidden" onmousedown="stopEvent(event)">
+<table border="0" cellpadding="3" cellspacing="3" width="100%">
+<tbody><tr><td><h3>Notakto</h3>
+<p>Version 1.0
+</p><p>© 2019 Mark Huckvale
+</p><p><a href="http://www.markhuckvale.com">www.markhuckvale.com</a>
+</p></td></tr>
+<tr><td><button class="button" onclick="cancel('aboutdlg')">OK</button><button class="button" onclick="reset()">Reset</button></td></tr>
+</tbody></table>
+</div>
+
+<!-- New Game Dialog -->
+<div id="newgamedlg" class="modal" style="visibility:hidden" onmousedown="stopEvent(event)">
+<table border="0" cellpadding="3" cellspacing="3" width="100%">
+<tbody><tr><td><h3>New Game</h3></td></tr>
+<tr><td><button class="button" onclick="startgame(0)">Human - Human</button></td></tr>
+<tr><td><button class="button" onclick="startgame(1)">Human - Computer</button></td></tr>
+<tr><td><button class="button" onclick="startgame(2)">Computer - Human</button></td></tr>
+<tr><td><button class="button" onclick="cancel('newgamedlg')">Cancel</button></td></tr>
+</tbody></table>
+</div>
+
+
+
+</body></html>
