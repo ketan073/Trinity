@@ -167,7 +167,7 @@ body { -webkit-user-select: none; }
 <canvas id="board" width="800" height="800" style="cursor:default;" moz-opaque="" ontouchstart="touchstart(event);"></canvas>
 </div>
 
-<p align="center"><button onclick="newgame()">New</button>
+<p align="center"><button style="background-color: #ea4335; onclick="startgame(0)">Reset</button>
 
         </p></div>
     </div>
@@ -192,9 +192,7 @@ body { -webkit-user-select: none; }
 <!-- New Game Dialog -->
 <div id="newgamedlg" class="modal" style="visibility:hidden" onmousedown="stopEvent(event)">
 <table border="0" cellpadding="3" cellspacing="3" width="100%">
-<tbody><tr><td><h3>New Game</h3></td></tr>
-<tr><td><button class="button" onclick="startgame(0)">Reset</button></td></tr>
-<tr><td><button class="button" onclick="cancel('newgamedlg')">Cancel</button></td></tr>
+<tbody>
 </tbody></table>
 </div>
 
